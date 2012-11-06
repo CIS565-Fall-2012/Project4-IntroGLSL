@@ -66,7 +66,7 @@ You will also have to bind each filter you write to a keyboard key, such that hi
 
 For this project, the console window will show what shaders are loaded, and will report shader compile/link warnings and errors. The base code does not have any build or shader warnings or errors; neither should your code submission!
 
-![Example console window](HW4-Sandbox/raw/master/readmeFiles/consoleExample.png)
+![Example console window](Project4-IntroGLSL/raw/master/readmeFiles/consoleExample.png)
 
 IMPORTANT: You MAY NOT copy/paste code from other sources for any of your filters! If you choose to make your own filter(s), please document what they are, how they work, and how your implementation works.
 
@@ -79,7 +79,7 @@ Create a new fragment shader starting with `passthroughFS.glsl`, that performans
 
 `vec3(1.0) - rgb`
 
-![Example negative filter](HW4-Sandbox/raw/master/readmeFiles/negativeFilter.png)
+![Example negative filter](Project4-IntroGLSL/raw/master/readmeFiles/negativeFilter.png)
 
 **Gaussian Blur**
 
@@ -87,7 +87,7 @@ Create a new fragment shader starting with `boxBlurFS.glsl`, that performs a 3x3
 
 `1/16 * [[1 2 1][2 4 2][1 2 1]]`
 
-![Example gaussian filter](HW4-Sandbox/raw/master/readmeFiles/gaussianFilter.png)
+![Example gaussian filter](Project4-IntroGLSL/raw/master/readmeFiles/gaussianFilter.png)
 
 **Grayscale**
 
@@ -99,7 +99,7 @@ Create a new fragment shader starting with `passthroughFS.glsl`, that displays t
 
 Then set the output `r`, `g`, and `b` components to the lumiance.
 
-![Example grayscale filter](HW4-Sandbox/raw/master/readmeFiles/grayscaleFilter.png)
+![Example grayscale filter](Project4-IntroGLSL/raw/master/readmeFiles/grayscaleFilter.png)
 
 **Edge Detection**
 
@@ -111,7 +111,7 @@ Build on both our Gaussian blur and Grayscale filters to create an edge detectio
 
 Run the kernels on the luminance of each texel, instead of the `rgb` components used in the Gaussian blur. The result is two floating-point values, one from each kernel. Create a `vec2` from these values, and set the output `rgb` components to the vector’s length.
 
-![Example edge filter](HW4-Sandbox/raw/master/readmeFiles/edgeFilter.png)
+![Example edge filter](Project4-IntroGLSL/raw/master/readmeFiles/edgeFilter.png)
 
 **Toon Shading**
 
@@ -129,7 +129,7 @@ First, perform edge detection. If the length of the vector is above a threshold 
 
 `rgb = vec3(irgb) / quantize;`
 
-![Example toon filter](HW4-Sandbox/raw/master/readmeFiles/toonFilter.png)
+![Example toon filter](Project4-IntroGLSL/raw/master/readmeFiles/toonFilter.png)
 
 -------------------------------------------------------------------------------
 PART 2 REQUIREMENTS:
@@ -144,11 +144,11 @@ You are required to implement the following:
 
 * A sin-wave based vertex shader:
 
-![Example sin wave grid](HW4-Sandbox/raw/master/readmeFiles/sinWaveGrid.png)
+![Example sin wave grid](Project4-IntroGLSL/raw/master/readmeFiles/sinWaveGrid.png)
 
 * A simplex noise based vertex shader:
 
-![Example simplex noise wave grid](HW4-Sandbox/raw/master/readmeFiles/oceanWave.png)
+![Example simplex noise wave grid](Project4-IntroGLSL/raw/master/readmeFiles/oceanWave.png)
 
 * One interesting vertex shader of your choice
 
