@@ -160,7 +160,7 @@ PART 2 WALKTHROUGH:
 * For this assignment, you will need the latest version of either Chrome, Firefox, or Safari.
 * Begin by opening index.html. You should see a flat grid of black and white lines on the xy plane:
 
-![Example boring grid](HW4-Sandbox/raw/master/readmeFiles/emptyGrid.png)
+![Example boring grid](Project4-IntroGLSL/raw/master/readmeFiles/emptyGrid.png)
 
 * In this assignment, you will animate the grid in a wave-like pattern using a vertex shader, and determine each vertex’s color based on its height, as seen in the example in the requirements.
 * The vertex and fragment shader are located in script tags in `index.html`.
