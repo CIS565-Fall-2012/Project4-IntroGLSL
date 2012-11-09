@@ -13,6 +13,15 @@ const char *attributeLocations[] = { "Position", "Tex" };
 
 GLuint passthroughProgram;
 GLuint boxBlurProgram;
+GLuint imageNegativeProgram;
+GLuint greyScaleProgram;
+GLuint gaussBlurProgram;
+GLuint gammaCorrectionProgram;
+GLuint contrastProgram;
+GLuint edgeDetectionProgram;
+GLuint toonShaderProgram;
+GLuint nightVisionProgram;
+GLuint brightProgram;
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
@@ -104,6 +113,35 @@ void keyboard(unsigned char key, int x, int y)
 	   case '2':
            glUseProgram(boxBlurProgram);
 		   break;
+	   case '3':
+	       glUseProgram(imageNegativeProgram);
+		   break;
+	   case '4':
+		   glUseProgram(gaussBlurProgram);
+		   break;
+	   case '5':
+           glUseProgram(greyScaleProgram);
+		   break;
+	   case '6':
+           glUseProgram(edgeDetectionProgram);
+		   break;
+	   case '7':
+           glUseProgram(toonShaderProgram);
+		   break;
+	   case '8':
+           glUseProgram(gammaCorrectionProgram);
+		   break;
+	   case '9':
+           glUseProgram(contrastProgram);
+		   break;
+	   case '0':
+           glUseProgram(nightVisionProgram);
+		   break;
+	   case 'b':
+           glUseProgram(brightProgram);
+		   break;
+
+		   
 	}
 }
 
@@ -133,6 +171,15 @@ int main(int argc, char* argv[])
     initTextures();
 	passthroughProgram = initShader("passthroughVS.glsl", "passthroughFS.glsl");
 	boxBlurProgram = initShader("passthroughVS.glsl", "boxBlurFS.glsl");
+	imageNegativeProgram = initShader("passthroughVS.glsl", "imageNegative.glsl");
+	gaussBlurProgram = initShader("passthroughVS.glsl", "gaussBlur.glsl");
+	greyScaleProgram = initShader("passthroughVS.glsl", "greyScale.glsl");
+	gammaCorrectionProgram = initShader("passthroughVS.glsl", "gammaCorrection.glsl");
+	contrastProgram = initShader("passthroughVS.glsl", "contrast.glsl");
+    edgeDetectionProgram = initShader("passthroughVS.glsl", "edgeDetection.glsl");
+	toonShaderProgram = initShader("passthroughVS.glsl", "toonShader.glsl");
+	nightVisionProgram = initShader("passthroughVS.glsl", "NightVision.glsl");
+	brightProgram = initShader("passthroughVS.glsl", "brightness.glsl");
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	
