@@ -13,6 +13,15 @@ const char *attributeLocations[] = { "Position", "Tex" };
 
 GLuint passthroughProgram;
 GLuint boxBlurProgram;
+GLuint negativeProgram;
+GLuint gaussianBlurProgram;
+GLuint grayscaleProgram;
+GLuint edgeDetectionProgram;
+GLuint toonShadingProgram;
+GLuint pixelizeProgram;
+GLuint cmykProgram;
+GLuint gammaCorrectionProgram;
+GLuint contrastProgram;
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
@@ -104,6 +113,34 @@ void keyboard(unsigned char key, int x, int y)
 	   case '2':
            glUseProgram(boxBlurProgram);
 		   break;
+	   case '3':
+		   glUseProgram(negativeProgram);
+		   break;
+		case '4':
+		   glUseProgram(gaussianBlurProgram);
+		   break;
+		case '5':
+		   glUseProgram(grayscaleProgram);
+		   break;
+		case '6':
+		   glUseProgram(edgeDetectionProgram);
+		   break;
+		case '7':
+		   glUseProgram(toonShadingProgram);
+		   break;
+		case '8':
+		   glUseProgram(pixelizeProgram);
+		   break;
+		case '9':
+		   glUseProgram(cmykProgram);
+		   break;
+		case '0':
+		   glUseProgram(gammaCorrectionProgram);
+		   break;
+		case '-':
+		   glUseProgram(contrastProgram);
+		   break; 
+		   
 	}
 }
 
@@ -133,6 +170,15 @@ int main(int argc, char* argv[])
     initTextures();
 	passthroughProgram = initShader("passthroughVS.glsl", "passthroughFS.glsl");
 	boxBlurProgram = initShader("passthroughVS.glsl", "boxBlurFS.glsl");
+	negativeProgram	= initShader("passthroughVS.glsl", "negativeFS.glsl");
+	gaussianBlurProgram =initShader("passthroughVS.glsl", "gaussianBlurFS.glsl");
+	grayscaleProgram = initShader("passthroughVS.glsl", "grayscaleFS.glsl");
+	edgeDetectionProgram = initShader("passthroughVS.glsl", "edgeDetectionFS.glsl");
+	toonShadingProgram = initShader("passthroughVS.glsl", "toonShadingFS.glsl");
+	pixelizeProgram = initShader("passthroughVS.glsl", "pixelizeFS.glsl");
+	cmykProgram = initShader("passthroughVS.glsl", "cmykFS.glsl");
+	gammaCorrectionProgram = initShader("passthroughVS.glsl", "gammaCorrectionFS.glsl");
+	contrastProgram = initShader("passthroughVS.glsl", "contrastFS.glsl");
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	
