@@ -12,6 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="boxBlurFS.glsl" />
+    <None Include="gaussBlurFS.glsl" />
+    <None Include="negativeFS.glsl" />
     <None Include="passthroughFS.glsl" />
     <None Include="passthroughVS.glsl" />
   </ItemGroup>

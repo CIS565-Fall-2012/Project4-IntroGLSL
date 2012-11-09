@@ -13,6 +13,8 @@ const char *attributeLocations[] = { "Position", "Tex" };
 
 GLuint passthroughProgram;
 GLuint boxBlurProgram;
+GLuint negativeProgram;
+GLuint gaussBlurProgram;
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
@@ -104,6 +106,12 @@ void keyboard(unsigned char key, int x, int y)
 	   case '2':
            glUseProgram(boxBlurProgram);
 		   break;
+	   case '3':
+		   glUseProgram(negativeProgram);
+		   break;
+	   case '4':
+		   glUseProgram(gaussBlurProgram);
+		   break;
 	}
 }
 
@@ -133,6 +141,8 @@ int main(int argc, char* argv[])
     initTextures();
 	passthroughProgram = initShader("passthroughVS.glsl", "passthroughFS.glsl");
 	boxBlurProgram = initShader("passthroughVS.glsl", "boxBlurFS.glsl");
+	negativeProgram = initShader("passthroughVS.glsl", "negativeFS.glsl");
+	gaussBlurProgram = initShader("passthroughVS.glsl", "gaussBlurFS.glsl");
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	
