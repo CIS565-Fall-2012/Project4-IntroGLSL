@@ -46,6 +46,9 @@ PART 2: Vertex Shading
 
 - Additional
 * A sin-wave varying on the radius from the center
+What it does: generate a sine wave based on the radius from the center
+How it works: compute the radius from the center(0.5, 0.5) for each vertex and compute the hight by passing this radius to sine function.
+
 ![Example radial sine](Project4-IntroGLSL/raw/master/readmeFiles/radialSine.png)
 
 -------------------------------------------------------------------------------
