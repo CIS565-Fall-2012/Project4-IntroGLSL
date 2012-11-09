@@ -7,6 +7,9 @@
 int width = 640;
 int height = 480;
 
+//int width = 1280;
+//int height = 720;
+
 GLuint positionLocation = 0;
 GLuint texcoordsLocation = 1;
 const char *attributeLocations[] = { "Position", "Tex" };
@@ -18,6 +21,9 @@ GLuint gaussianBlurProgram;
 GLuint grayScaleFSProgram;
 GLuint edgeDetectionProgram;
 GLuint toonShadingProgram;
+GLuint sepiaShadingProgram;
+GLuint pixelateShaderProgram;
+GLuint brightnessShaderProgram;
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
@@ -42,6 +48,7 @@ GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 void initTextures()
 {
 	GLuint image = SOIL_load_OGL_texture("Valve.png", 3, 0, 0);
+	//GLuint image = SOIL_load_OGL_texture("Scene.png", 3, 0, 0);
 	glBindTexture(GL_TEXTURE_2D, image);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -124,6 +131,15 @@ void keyboard(unsigned char key, int x, int y)
 		case '7':
 			glUseProgram(toonShadingProgram);
 			break;
+		case '8':
+			glUseProgram(sepiaShadingProgram);
+			break;
+		case '9':
+			glUseProgram(pixelateShaderProgram);
+			break;
+		case '0':
+			glUseProgram(brightnessShaderProgram);
+			break;		
 	}
 }
 
@@ -151,6 +167,7 @@ int main(int argc, char* argv[])
 
 	initVAO();
     initTextures();
+	
 	passthroughProgram = initShader("passthroughVS.glsl", "passthroughFS.glsl");
 	boxBlurProgram = initShader("passthroughVS.glsl", "boxBlurFS.glsl");
 	imageNegativeProgram = initShader("passthroughVS.glsl", "imageNegativeFS.glsl");
@@ -158,7 +175,10 @@ int main(int argc, char* argv[])
 	grayScaleFSProgram = initShader("passthroughVS.glsl", "grayScaleFS.glsl");
 	edgeDetectionProgram = initShader("passthroughVS.glsl", "edgeDetectionFS.glsl");
 	toonShadingProgram = initShader("passthroughVS.glsl", "toonShadingFS.glsl");
-
+	sepiaShadingProgram = initShader("passthroughVS.glsl", "sepiaShadingFS.glsl");
+	pixelateShaderProgram = initShader("passthroughVS.glsl", "pixelateShaderFS.glsl");
+	brightnessShaderProgram = initShader("passthroughVS.glsl", "brightnessShaderFS.glsl");
+	
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	
     glutKeyboardFunc(keyboard);

@@ -19,7 +19,7 @@ mat3 Sobel_V = mat3(-1, 0, 1,
 					-1, 0, 1);
 
 const vec3 W = vec3(0.2125, 0.7154, 0.0721);
-const float quantize = 0.5;
+const float quantize = 3.0;
 
 void main(void)
 {
@@ -35,16 +35,17 @@ void main(void)
 			vec3 C2 = texture2D(u_image, coord2).rgb;
 			
 			float LH = Sobel_H[i][j] * dot(C1, W);
-			float LV = Sobel_V[i][j] * dot(C2, W);
+			float LV = Sobel_V[j][i] * dot(C2, W);
 
 			accum += vec2(LH, LV);
 		}
-	}	
-	float length = sqrt(accum.x * accum.x + accum.y * accum.y);
+	}
+	accum = accum / (KERNEL_WIDTH * KERNEL_WIDTH);	
+	float length = length(accum);
 	
-	if(length > 2)
+	if(length > (quantize / 100.0))
 	{
-		gl_FragColor = vec4(vec3(0.0), 1.0);
+		gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
 	}
 	else
 	{

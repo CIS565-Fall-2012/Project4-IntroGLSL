@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <None Include="brightnessShaderFS.glsl" />
     <None Include="boxBlurFS.glsl" />
     <None Include="edgeDetectionFS.glsl" />
     <None Include="gaussianBlurFS.glsl" />
@@ -18,6 +19,8 @@
     <None Include="imageNegativeFS.glsl" />
     <None Include="passthroughFS.glsl" />
     <None Include="passthroughVS.glsl" />
+    <None Include="pixelateShaderFS.glsl" />
+    <None Include="sepiaShadingFS.glsl" />
     <None Include="toonShadingFS.glsl" />
   </ItemGroup>
   <ItemGroup>

@@ -34,7 +34,7 @@ void main(void)
 			vec3 C2 = texture2D(u_image, coord2).rgb;
 			
 			float LH = Sobel_H[i][j] * dot(C1, W);
-			float LV = Sobel_V[i][j] * dot(C2, W);
+			float LV = Sobel_V[j][i] * dot(C2, W);
 
 			accum += vec2(LH, LV);
 		}

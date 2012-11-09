@@ -20,8 +20,8 @@
     varying vec3 fs_color;
     void main(void)
     {
-        //float len = length(position - vec2(0.5, 0.5));
-        float len = length(position - vec2(u_cx, u_cy));
+        float len = length(position - vec2(0.5, 0.5));
+        //float len = length(position - vec2(u_cx, u_cy));
         float s_contrib = sin(-len*2.0*3.14159 + u_time);
         float t_contrib = cos(-len*2.0*3.14159 + u_time);
         
