@@ -1,3 +1,28 @@
+------------------------------------------------------------------------------
+SUBMISSION
+------------------------------------------------------------------------------
+Part 1: 
+Implemented features:
+Image negative
+Gaussian blur
+Grayscale
+Edge Detection
+Toon shading
+Gamma correction (http://en.wikipedia.org/wiki/Gamma_correction)
+Brightness (http://en.wikipedia.org/wiki/Brightness)
+Contrast (http://en.wikipedia.org/wiki/Contrast_(vision))
+Night vision (http://wtomandev.blogspot.com/2009/09/night-vision-effect.html)
+
+Part 2:
+A sin-wave based vertex shader
+simplex noise based vertex shader
+Custom shader - It is ocean wave based shader.
+
+Blog Link: http://imageprocessingglsl.blogspot.com/
+
+
+
+
 -------------------------------------------------------------------------------
 CIS565: Project 4: Image Processing/Vertex Shading
 -------------------------------------------------------------------------------
