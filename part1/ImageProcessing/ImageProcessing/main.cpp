@@ -4,11 +4,11 @@
 #include "Utility.h"
 #include "SOIL.h"
 
-int width = 640;
-int height = 480;
+//int width = 640;
+//int height = 480;
 
-//int width = 1280;
-//int height = 720;
+int width = 1280;
+int height = 720;
 
 GLuint positionLocation = 0;
 GLuint texcoordsLocation = 1;
@@ -24,6 +24,7 @@ GLuint toonShadingProgram;
 GLuint sepiaShadingProgram;
 GLuint pixelateShaderProgram;
 GLuint brightnessShaderProgram;
+GLuint gammaCorrectionProgram;
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
@@ -47,8 +48,8 @@ GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 
 void initTextures()
 {
-	GLuint image = SOIL_load_OGL_texture("Valve.png", 3, 0, 0);
-	//GLuint image = SOIL_load_OGL_texture("Scene.png", 3, 0, 0);
+	//GLuint image = SOIL_load_OGL_texture("Valve.png", 3, 0, 0);
+	GLuint image = SOIL_load_OGL_texture("Scene.png", 3, 0, 0);
 	glBindTexture(GL_TEXTURE_2D, image);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -139,7 +140,10 @@ void keyboard(unsigned char key, int x, int y)
 			break;
 		case '0':
 			glUseProgram(brightnessShaderProgram);
-			break;		
+			break;
+		case '-':
+			glUseProgram(gammaCorrectionProgram);
+			break;	
 	}
 }
 
@@ -178,6 +182,7 @@ int main(int argc, char* argv[])
 	sepiaShadingProgram = initShader("passthroughVS.glsl", "sepiaShadingFS.glsl");
 	pixelateShaderProgram = initShader("passthroughVS.glsl", "pixelateShaderFS.glsl");
 	brightnessShaderProgram = initShader("passthroughVS.glsl", "brightnessShaderFS.glsl");
+	gammaCorrectionProgram = initShader("passthroughVS.glsl", "gammaCorrectionFS.glsl");
 	
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	

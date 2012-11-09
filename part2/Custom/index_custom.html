@@ -27,7 +27,7 @@
         
         float height = pow(s_contrib*t_contrib, 2.5);
         
-        fs_color = vec3(clamp(height, 0.0, 1.0), (1.0 - abs(height)), clamp(-1.0 * height, 0.0, 1.0));
+        fs_color = vec3(clamp(height, 0.0, 1.0), clamp(-1.0 * height, 0.0, 1.0), (1.0 - abs(height)));
 		gl_Position = u_modelViewPerspective * vec4(vec3(position, height), 1.0);
     }
 </script>
