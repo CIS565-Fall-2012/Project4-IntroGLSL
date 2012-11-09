@@ -18,6 +18,9 @@ GLuint gaussBlurProgram;
 GLuint grayscaleProgram;
 GLuint sobelProgram;
 GLuint toonShadingProgram;
+GLuint brightnessProgram;
+GLuint nightVisionProgram;
+GLuint pixelizeProgram;
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
@@ -124,6 +127,15 @@ void keyboard(unsigned char key, int x, int y)
 	   case '7':
 		   glUseProgram(toonShadingProgram);
 		   break;
+	   case '8':
+		   glUseProgram(brightnessProgram);
+		   break;
+	   case '9':
+		   glUseProgram(nightVisionProgram);
+		   break;
+	   case '0':
+		   glUseProgram(pixelizeProgram);
+		   break;
 	}
 }
 
@@ -158,6 +170,9 @@ int main(int argc, char* argv[])
 	grayscaleProgram = initShader("passthroughVS.glsl", "grayscaleFS.glsl");
 	sobelProgram = initShader("passthroughVS.glsl", "sobelFS.glsl");
 	toonShadingProgram = initShader("passthroughVS.glsl", "toonShadingFS.glsl");
+	brightnessProgram = initShader("passthroughVS.glsl", "brightnessFS.glsl");
+	nightVisionProgram = initShader("passthroughVS.glsl", "nightVisionFS.glsl");
+	pixelizeProgram = initShader("passthroughVS.glsl", "pixelizeFS.glsl");
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	
