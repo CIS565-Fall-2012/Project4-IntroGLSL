@@ -15,6 +15,9 @@ GLuint passthroughProgram;
 GLuint boxBlurProgram;
 GLuint negativeProgram;
 GLuint gaussBlurProgram;
+GLuint grayscaleProgram;
+GLuint sobelProgram;
+GLuint toonShadingProgram;
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
@@ -112,6 +115,15 @@ void keyboard(unsigned char key, int x, int y)
 	   case '4':
 		   glUseProgram(gaussBlurProgram);
 		   break;
+	   case '5':
+		   glUseProgram(grayscaleProgram);
+		   break;
+	   case '6':
+		   glUseProgram(sobelProgram);
+		   break;
+	   case '7':
+		   glUseProgram(toonShadingProgram);
+		   break;
 	}
 }
 
@@ -143,6 +155,9 @@ int main(int argc, char* argv[])
 	boxBlurProgram = initShader("passthroughVS.glsl", "boxBlurFS.glsl");
 	negativeProgram = initShader("passthroughVS.glsl", "negativeFS.glsl");
 	gaussBlurProgram = initShader("passthroughVS.glsl", "gaussBlurFS.glsl");
+	grayscaleProgram = initShader("passthroughVS.glsl", "grayscaleFS.glsl");
+	sobelProgram = initShader("passthroughVS.glsl", "sobelFS.glsl");
+	toonShadingProgram = initShader("passthroughVS.glsl", "toonShadingFS.glsl");
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	
