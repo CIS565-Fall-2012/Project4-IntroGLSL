@@ -25,10 +25,15 @@ PART 1: Image Processing
 
 - Additional
 * Brightness
+
 ![Example brightness filter](Project4-IntroGLSL/raw/master/readmeFiles/brightness.png)
+
 * Night Vision
+
 ![Example night vision filter](Project4-IntroGLSL/raw/master/readmeFiles/nightVision.png)
+
 * Pixelization
+
 ![Example pixelization filter](Project4-IntroGLSL/raw/master/readmeFiles/pixelization.png)
 
 
