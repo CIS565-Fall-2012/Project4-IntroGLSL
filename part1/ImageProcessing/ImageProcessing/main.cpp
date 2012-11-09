@@ -13,6 +13,12 @@ const char *attributeLocations[] = { "Position", "Tex" };
 
 GLuint passthroughProgram;
 GLuint boxBlurProgram;
+GLuint negativeProgram;
+GLuint gaussProgram;
+GLuint grayProgram;
+GLuint sobelProgram;
+GLuint toonProgram;
+GLuint medianProgram;
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
@@ -104,6 +110,30 @@ void keyboard(unsigned char key, int x, int y)
 	   case '2':
            glUseProgram(boxBlurProgram);
 		   break;
+	   case '3':
+           glUseProgram(negativeProgram);
+		   break;
+	   case '4':
+           glUseProgram(gaussProgram);
+		   break;
+	   case '5':
+           glUseProgram(grayProgram);
+		   break;
+	   case '6':
+           glUseProgram(sobelProgram);
+		   break;
+	   case '7':
+           glUseProgram(toonProgram);
+		   break;
+	   case '8':
+           glUseProgram(medianProgram);
+		   break;
+	   case '9':
+           glUseProgram(toonProgram);
+		   break;
+	   case '0':
+           glUseProgram(toonProgram);
+		   break;
 	}
 }
 
@@ -133,6 +163,12 @@ int main(int argc, char* argv[])
     initTextures();
 	passthroughProgram = initShader("passthroughVS.glsl", "passthroughFS.glsl");
 	boxBlurProgram = initShader("passthroughVS.glsl", "boxBlurFS.glsl");
+	negativeProgram = initShader("passthroughVS.glsl", "negativeFS.glsl");
+	gaussProgram = initShader("passthroughVS.glsl", "gaussFS.glsl");
+	grayProgram = initShader("passthroughVS.glsl", "grayFS.glsl");
+	sobelProgram = initShader("passthroughVS.glsl", "sobelFS.glsl");
+	toonProgram = initShader("passthroughVS.glsl", "toonFS.glsl");
+	medianProgram = initShader("passthroughVS.glsl", "medianFS.glsl");
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	
