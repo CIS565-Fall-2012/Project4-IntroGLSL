@@ -13,6 +13,15 @@ const char *attributeLocations[] = { "Position", "Tex" };
 
 GLuint passthroughProgram;
 GLuint boxBlurProgram;
+GLuint negativeProgram;
+GLuint gaussianProgram;
+GLuint grayscaleProgram;
+GLuint edge_detectionProgram;
+GLuint toonProgram;
+GLuint brightnessProgram;
+GLuint contrastProgram;
+GLuint sepiaProgram;
+
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
@@ -104,6 +113,31 @@ void keyboard(unsigned char key, int x, int y)
 	   case '2':
            glUseProgram(boxBlurProgram);
 		   break;
+	   case '3':
+		   glUseProgram(negativeProgram);
+		   break;
+	   case '4':
+		   glUseProgram(gaussianProgram);
+		   break;
+	   case '5':
+		   glUseProgram(grayscaleProgram);
+		   break;
+	   case '6':
+		   glUseProgram(edge_detectionProgram);
+		   break;
+	   case '7':
+		   glUseProgram(toonProgram);
+		   break;
+	   case '8':
+		   glUseProgram(brightnessProgram);
+		   break;
+	   case '9':
+			glUseProgram(sepiaProgram);
+			break;
+		case '0':
+			glUseProgram(contrastProgram);
+			break;
+		   
 	}
 }
 
@@ -133,6 +167,14 @@ int main(int argc, char* argv[])
     initTextures();
 	passthroughProgram = initShader("passthroughVS.glsl", "passthroughFS.glsl");
 	boxBlurProgram = initShader("passthroughVS.glsl", "boxBlurFS.glsl");
+	negativeProgram= initShader("passthroughVS.glsl", "negative.glsl");
+	gaussianProgram= initShader("passthroughVS.glsl", "Gaussian.glsl");
+	grayscaleProgram= initShader("passthroughVS.glsl", "grayscale.glsl");
+	edge_detectionProgram= initShader("passthroughVS.glsl", "edge_detection.glsl");
+	brightnessProgram=initShader("passthroughVS.glsl", "brightness.glsl");
+	sepiaProgram=initShader("passthroughVS.glsl", "sepia.glsl");
+	contrastProgram=initShader("passthroughVS.glsl", "contrast.glsl");
+	toonProgram=initShader("passthroughVS.glsl", "toon.glsl");
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	
