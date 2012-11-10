@@ -5,7 +5,7 @@ uniform vec2 u_step;
 
 const int KERNEL_WIDTH = 5; // Odd
 const float offset = 2.0;
-const int center = floor( KERNEL_WIDTH*KERNEL_WIDTH/2 );
+const int center = KERNEL_WIDTH*KERNEL_WIDTH/2;
 
 const vec3 W = vec3( 0.2125, 0.7154, 0.0721 );
 
@@ -38,5 +38,5 @@ void main(void)
 		}
 	}
 
-    gl_FragColor = vec4( list[idx[center].y], 1.0 );
+    gl_FragColor = vec4( list[int(idx[center].y)], 1.0 );
 }
