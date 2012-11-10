@@ -1,0 +1,54 @@
+<! doctype html>
+<html>
+
+<head>
+<title>Vertex Wave</title>
+<meta charset ="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">  <!-- Use Chrome Frame in IE -->
+</head>
+
+<body>
+<div id="message" style="position:absolute;top:100px"></div> <!-- Pixel offset to avoid FPS counter -->
+<canvas id="canvas" style="border: none;" width="1024" height="768" tabindex="1"></canvas>
+
+<script id="vs" type="x-shader/x-vertex">
+    attribute vec2 position;
+    
+    uniform mat4 u_modelViewPerspective;
+    uniform float u_time;
+    varying vec3 v_color;
+    
+    const vec3 minColor = vec3(1.0,0.2,0.0);
+    const vec3 maxColor = vec3(0.0,0.8,1.0);
+        
+    float rand(vec2 val)
+{
+    return fract(sin(dot(val.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+    void main(void)
+    {
+		float height = 0.0;
+        float s_contrib = rand(vec2(position.y,position.y));
+        float t_contrib = sin(s_contrib*u_time);
+        height = t_contrib;
+        v_color = mix(minColor, maxColor, height);
+        gl_Position = u_modelViewPerspective * vec4(vec3(position, height), 1.0);
+    }
+</script>
+
+<script id="fs" type="x-shader/x-fragment">
+    precision mediump float;
+    varying vec3 v_color;
+    
+    void main(void)
+    {
+		gl_FragColor = vec4(vec3(v_color), 1.0);
+    }    
+</script>
+
+<script src ="gl-matrix.js" type ="text/javascript"></script>
+<script src ="webglUtility.js" type ="text/javascript"></script>
+<script src ="index.js" type ="text/javascript"></script>
+</body>
+
+</html>

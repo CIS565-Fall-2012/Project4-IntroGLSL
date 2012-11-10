@@ -4,8 +4,8 @@
 #include "Utility.h"
 #include "SOIL.h"
 
-int width = 640;
-int height = 480;
+int width = 512;
+int height = 512;
 
 GLuint positionLocation = 0;
 GLuint texcoordsLocation = 1;
@@ -13,6 +13,17 @@ const char *attributeLocations[] = { "Position", "Tex" };
 
 GLuint passthroughProgram;
 GLuint boxBlurProgram;
+GLuint negativeProgram;
+GLuint gaussianBlurProgram;
+GLuint grayscaleProgram;
+GLuint edgeDetectionProgram;
+GLuint toonShadingProgram;
+GLuint vintageProgram;
+GLuint brightnessProgram;
+GLuint sharpenProgram;
+GLuint unsharpMaskProgram;
+GLuint nightVisionProgram;
+GLuint weirdProgram;
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
@@ -36,7 +47,7 @@ GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 
 void initTextures()
 {
-	GLuint image = SOIL_load_OGL_texture("Valve.png", 3, 0, 0);
+	GLuint image = SOIL_load_OGL_texture("Lenna.png", 3, 0, 0);
 	glBindTexture(GL_TEXTURE_2D, image);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -104,6 +115,39 @@ void keyboard(unsigned char key, int x, int y)
 	   case '2':
            glUseProgram(boxBlurProgram);
 		   break;
+		case '3':
+           glUseProgram(negativeProgram);
+		   break;
+		case '4':
+           glUseProgram(gaussianBlurProgram);
+		   break;
+		case '5':
+           glUseProgram(grayscaleProgram);
+		   break;
+		case '6':
+           glUseProgram(edgeDetectionProgram);
+		   break;
+		case '7':
+           glUseProgram(toonShadingProgram);
+		   break;
+		case '8':
+           glUseProgram(vintageProgram);
+		   break;
+		case '9':
+           glUseProgram(brightnessProgram);
+		   break;
+		case '0':
+           glUseProgram(unsharpMaskProgram);
+		   break;
+		case '-':
+           glUseProgram(sharpenProgram);
+		   break;
+		case 'q':
+           glUseProgram(nightVisionProgram);
+		   break;
+		case 'w':
+           glUseProgram(weirdProgram);
+		   break;
 	}
 }
 
@@ -133,6 +177,17 @@ int main(int argc, char* argv[])
     initTextures();
 	passthroughProgram = initShader("passthroughVS.glsl", "passthroughFS.glsl");
 	boxBlurProgram = initShader("passthroughVS.glsl", "boxBlurFS.glsl");
+	negativeProgram = initShader("passthroughVS.glsl", "negativeFS.glsl");
+	gaussianBlurProgram = initShader("passthroughVS.glsl", "gaussianBlurFS.glsl");
+	grayscaleProgram = initShader("passthroughVS.glsl", "grayscaleFS.glsl");
+	edgeDetectionProgram = initShader("passthroughVS.glsl", "edgeDetectionFS.glsl");
+	toonShadingProgram = initShader("passthroughVS.glsl", "toonShadingFS.glsl");
+	vintageProgram = initShader("passthroughVS.glsl", "vintageFS.glsl");
+	brightnessProgram = initShader("passthroughVS.glsl", "brightnessFS.glsl");
+	unsharpMaskProgram = initShader("passthroughVS.glsl", "unsharpMaskFS.glsl");
+	sharpenProgram = initShader("passthroughVS.glsl", "sharpenFS.glsl");
+	nightVisionProgram = initShader("passthroughVS.glsl", "nightVisionFS.glsl");
+	weirdProgram = initShader("weirdVS.glsl", "passthroughFS.glsl");
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	
