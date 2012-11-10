@@ -8,20 +8,22 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageProcessing", "ImagePro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SOIL", "SOIL\SOIL.vcxproj", "{25544C77-3B78-405F-A15D-1231D05969F3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4671ECE0-8CAE-4F3F-95CA-8870F2D24C6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{25544C77-3B78-405F-A15D-1231D05969F3}.Debug|Win32.ActiveCfg = Debug|Win32
-		{25544C77-3B78-405F-A15D-1231D05969F3}.Debug|Win32.Build.0 = Debug|Win32
-		{25544C77-3B78-405F-A15D-1231D05969F3}.Release|Win32.ActiveCfg = Release|Win32
-		{25544C77-3B78-405F-A15D-1231D05969F3}.Release|Win32.Build.0 = Release|Win32
 		{C53A9886-B4FD-487A-83A5-01406BA9E8BF}.Debug|Win32.ActiveCfg = Debug|Win32
 		{C53A9886-B4FD-487A-83A5-01406BA9E8BF}.Debug|Win32.Build.0 = Debug|Win32
 		{C53A9886-B4FD-487A-83A5-01406BA9E8BF}.Release|Win32.ActiveCfg = Release|Win32
 		{C53A9886-B4FD-487A-83A5-01406BA9E8BF}.Release|Win32.Build.0 = Release|Win32
+		{25544C77-3B78-405F-A15D-1231D05969F3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{25544C77-3B78-405F-A15D-1231D05969F3}.Debug|Win32.Build.0 = Debug|Win32
+		{25544C77-3B78-405F-A15D-1231D05969F3}.Release|Win32.ActiveCfg = Release|Win32
+		{25544C77-3B78-405F-A15D-1231D05969F3}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
