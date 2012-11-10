@@ -31,6 +31,9 @@
     var positionLocation = 0;
     var heightLocation = 1;
     var u_modelViewPerspectiveLocation;
+	
+	var u_timeLocation;
+	var delta = 0.0;
 
     (function initializeShader() {
         var program;
@@ -41,6 +44,8 @@
 		context.bindAttribLocation(program, positionLocation, "position");
 		u_modelViewPerspectiveLocation = context.getUniformLocation(program,"u_modelViewPerspective");
 
+		u_timeLocation = context.getUniformLocation(program,"u_time");
+		
         context.useProgram(program);
     })();
 
@@ -138,13 +143,17 @@
         var mvp = mat4.create();
         mat4.multiply(persp, mv, mvp);
 
-        ///////////////////////////////////////////////////////////////////////////
+		delta += 0.01;
+		
+		///////////////////////////////////////////////////////////////////////////
         // Render
         context.clear(context.COLOR_BUFFER_BIT | context.DEPTH_BUFFER_BIT);
 
         context.uniformMatrix4fv(u_modelViewPerspectiveLocation, false, mvp);
         context.drawElements(context.LINES, numberOfIndices, context.UNSIGNED_SHORT,0);
 
+		context.uniform1f(u_timeLocation, delta);
+		
 		window.requestAnimFrame(animate);
     })();
 
