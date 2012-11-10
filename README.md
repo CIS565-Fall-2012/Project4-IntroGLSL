@@ -1,10 +1,32 @@
--------------------------------------------------------------------------------
+﻿-------------------------------------------------------------------------------
 CIS565: Project 4: Image Processing/Vertex Shading
 -------------------------------------------------------------------------------
 Fall 2012
 -------------------------------------------------------------------------------
 Due Friday 11/09/2012
 -------------------------------------------------------------------------------
+
+Implemented the following:
+1 - Original Image
+2 - Box blur
+3 - Negative
+4 - Gaussian Blur
+5 - Grayscale
+6 - Edge Detection
+7 - Toon Shading
+8 - Vintage Photo (Blur, Noise, Vignettting)
+9 - Brightness
+0 - Unsharp Mask
+- - Sharpened image
+q - Night Vision (Noise and circular mask)
+
+
+In my custom vertex shader, I randomized using the position's y value and then nultiplied it with time and then took a sin wave to get a wave moving up and down randomized on y position.
+
+
+Blog:
+http://tijugraphics.blogspot.com/
+
 
 -------------------------------------------------------------------------------
 NOTE:

@@ -12,8 +12,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="boxBlurFS.glsl" />
+    <None Include="brightnessFS.glsl" />
+    <None Include="edgeDetectionFS.glsl" />
+    <None Include="gaussianBlurFS.glsl" />
+    <None Include="grayscaleFS.glsl" />
+    <None Include="negativeFS.glsl" />
+    <None Include="nightVisionFS.glsl" />
     <None Include="passthroughFS.glsl" />
     <None Include="passthroughVS.glsl" />
+    <None Include="sharpenFS.glsl" />
+    <None Include="toonShadingFS.glsl" />
+    <None Include="unsharpMaskFS.glsl" />
+    <None Include="vintageFS.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
