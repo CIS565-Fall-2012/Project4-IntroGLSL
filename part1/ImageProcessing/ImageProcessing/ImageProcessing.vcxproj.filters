@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Utility.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Utility.h" />
+    <ClInclude Include="toon.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="boxBlurFS.glsl" />
+    <None Include="passthroughFS.glsl" />
+    <None Include="passthroughVS.glsl" />
+    <None Include="negative.glsl" />
+    <None Include="Gaussian.glsl" />
+    <None Include="grayscale.glsl" />
+    <None Include="brightness.glsl" />
+    <None Include="sepia.glsl" />
+    <None Include="edge_detection.glsl" />
+    <None Include="toon.glsl" />
+    <None Include="contrast.glsl" />
+  </ItemGroup>
+</Project>
