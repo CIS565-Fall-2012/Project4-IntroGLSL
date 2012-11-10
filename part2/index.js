@@ -1,4 +1,4 @@
-(function() {
+(function () {
     "use strict";
     /*global window,document,Float32Array,Uint16Array,mat4,vec3,snoise*/
     /*global getShaderSource,createWebGLContext,createProgram*/
@@ -31,15 +31,19 @@
     var positionLocation = 0;
     var heightLocation = 1;
     var u_modelViewPerspectiveLocation;
+    var u_timeLocation;
+    var timeValue = 0.0;
 
     (function initializeShader() {
         var program;
         var vs = getShaderSource(document.getElementById("vs"));
         var fs = getShaderSource(document.getElementById("fs"));
 
-		var program = createProgram(context, vs, fs, message);
-		context.bindAttribLocation(program, positionLocation, "position");
-		u_modelViewPerspectiveLocation = context.getUniformLocation(program,"u_modelViewPerspective");
+        var program = createProgram(context, vs, fs, message);
+        context.bindAttribLocation(program, positionLocation, "position");
+        u_modelViewPerspectiveLocation = context.getUniformLocation(program, "u_modelViewPerspective");
+
+        u_timeLocation = context.getUniformLocation(program, "u_time");
 
         context.useProgram(program);
     })();
@@ -56,8 +60,7 @@
             context.vertexAttribPointer(positionLocation, 2, context.FLOAT, false, 0, 0);
             context.enableVertexAttribArray(positionLocation);
 
-            if (heights)
-            {
+            if (heights) {
                 // Heights
                 var heightsName = context.createBuffer();
                 context.bindBuffer(context.ARRAY_BUFFER, heightsName);
@@ -84,49 +87,45 @@
         var indicesIndex = 0;
         var length;
 
-        for (var j = 0; j < NUM_WIDTH_PTS; ++j)
-        {
-            positions[positionsIndex++] = j /(NUM_WIDTH_PTS - 1);
+        for (var j = 0; j < NUM_WIDTH_PTS; ++j) {
+            positions[positionsIndex++] = j / (NUM_WIDTH_PTS - 1);
             positions[positionsIndex++] = 0.0;
 
-            if (j>=1)
-            {
+            if (j >= 1) {
                 length = positionsIndex / 2;
                 indices[indicesIndex++] = length - 2;
                 indices[indicesIndex++] = length - 1;
             }
         }
 
-        for (var i = 0; i < HEIGHT_DIVISIONS; ++i)
-        {
-             var v = (i + 1) / (NUM_HEIGHT_PTS - 1);
-             positions[positionsIndex++] = 0.0;
-             positions[positionsIndex++] = v;
+        for (var i = 0; i < HEIGHT_DIVISIONS; ++i) {
+            var v = (i + 1) / (NUM_HEIGHT_PTS - 1);
+            positions[positionsIndex++] = 0.0;
+            positions[positionsIndex++] = v;
 
-             length = (positionsIndex / 2);
-             indices[indicesIndex++] = length - 1;
-             indices[indicesIndex++] = length - 1 - NUM_WIDTH_PTS;
+            length = (positionsIndex / 2);
+            indices[indicesIndex++] = length - 1;
+            indices[indicesIndex++] = length - 1 - NUM_WIDTH_PTS;
 
-             for (var k = 0; k < WIDTH_DIVISIONS; ++k)
-             {
-                 positions[positionsIndex++] = (k + 1) / (NUM_WIDTH_PTS - 1);
-                 positions[positionsIndex++] = v;
+            for (var k = 0; k < WIDTH_DIVISIONS; ++k) {
+                positions[positionsIndex++] = (k + 1) / (NUM_WIDTH_PTS - 1);
+                positions[positionsIndex++] = v;
 
-                 length = positionsIndex / 2;
-                 var new_pt = length - 1;
-                 indices[indicesIndex++] = new_pt - 1;  // Previous side
-                 indices[indicesIndex++] = new_pt;
+                length = positionsIndex / 2;
+                var new_pt = length - 1;
+                indices[indicesIndex++] = new_pt - 1;  // Previous side
+                indices[indicesIndex++] = new_pt;
 
-                 indices[indicesIndex++] = new_pt - NUM_WIDTH_PTS;  // Previous bottom
-                 indices[indicesIndex++] = new_pt;
-             }
+                indices[indicesIndex++] = new_pt - NUM_WIDTH_PTS;  // Previous bottom
+                indices[indicesIndex++] = new_pt;
+            }
         }
 
         uploadMesh(positions, heights, indices);
         numberOfIndices = indices.length;
     })();
 
-    (function animate(){
+    (function animate() {
         ///////////////////////////////////////////////////////////////////////////
         // Update
 
@@ -138,14 +137,20 @@
         var mvp = mat4.create();
         mat4.multiply(persp, mv, mvp);
 
+        timeValue += 0.001;
+        //if (timeValue >= 1.0) {
+        //    timeValue = 0.0;
+        //}
+        context.uniform1f(u_timeLocation, timeValue);
+
         ///////////////////////////////////////////////////////////////////////////
         // Render
         context.clear(context.COLOR_BUFFER_BIT | context.DEPTH_BUFFER_BIT);
 
         context.uniformMatrix4fv(u_modelViewPerspectiveLocation, false, mvp);
-        context.drawElements(context.LINES, numberOfIndices, context.UNSIGNED_SHORT,0);
+        context.drawElements(context.LINES, numberOfIndices, context.UNSIGNED_SHORT, 0);
 
-		window.requestAnimFrame(animate);
+        window.requestAnimFrame(animate);
     })();
 
-}());
+} ());

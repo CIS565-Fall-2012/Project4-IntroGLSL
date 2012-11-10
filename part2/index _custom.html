@@ -1,0 +1,51 @@
+<! doctype html>
+<html>
+
+<head>
+<title>Vertex Wave</title>
+<meta charset ="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">  <!-- Use Chrome Frame in IE -->
+</head>
+
+<body>
+<div id="message" style="position:absolute;top:100px"></div> <!-- Pixel offset to avoid FPS counter -->
+<canvas id="canvas" style="border: none;" width="1024" height="768" tabindex="1"></canvas>
+
+<script id="vs" type="x-shader/x-vertex">
+    attribute vec2 position;
+    
+    uniform mat4 u_modelViewPerspective;
+
+    uniform float u_time;
+    varying vec4 fs_color;
+    
+    
+    void main(void)
+    {
+        float s_contrib = 0.5 * cos(position.x * 2.0 * 3.14159 + u_time) * sin(position.y * 2.0 * 3.14159 + u_time);
+        float t_contrib = 0.5 * sin(position.x * 2.0 * 3.14159 + u_time) * sin(position.y * 2.0 * 3.14159 + u_time);
+        float z_contrib = cos(position.y * 2.0 * 3.14159 + u_time);
+		float height = z_contrib;
+        gl_Position = u_modelViewPerspective * vec4(s_contrib, t_contrib, z_contrib, 1.0);
+        //Interpolating manually, from green (max height) to red (min height)
+        fs_color = height * (vec4(0, 1, 0, 0) - vec4(1, 0, 0, 0)) + vec4(1, 0, 0, 0);
+    }
+</script>
+
+<script id="fs" type="x-shader/x-fragment">
+    precision mediump float;
+
+    varying vec4 fs_color;
+    void main(void)
+    {
+		gl_FragColor = fs_color;
+        gl_FragColor.a = 1.0;
+    }    
+</script>
+
+<script src ="gl-matrix.js" type ="text/javascript"></script>
+<script src ="webglUtility.js" type ="text/javascript"></script>
+<script src ="index.js" type ="text/javascript"></script>
+</body>
+
+</html>

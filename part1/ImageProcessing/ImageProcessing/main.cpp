@@ -6,19 +6,30 @@
 
 int width = 640;
 int height = 480;
+float tim = 0.0f;
 
 GLuint positionLocation = 0;
 GLuint texcoordsLocation = 1;
+
 const char *attributeLocations[] = { "Position", "Tex" };
 
 GLuint passthroughProgram;
 GLuint boxBlurProgram;
+GLuint imageNegativeProgram;
+GLuint grayscaleProgram;
+GLuint gaussianBlurProgram;
+GLuint edgeDetectionProgram;
+GLuint toonProgram;
+GLuint brightnessProgram;
+GLuint nightVisionProgram;
+GLuint pixelateProgram;
+GLuint program;
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
-	GLuint program = Utility::createProgram(vertexShaderPath, fragmentShaderPath, attributeLocations, 2);
+	program = Utility::createProgram(vertexShaderPath, fragmentShaderPath, attributeLocations, 2);
 	GLint location;
-
+	
 	glUseProgram(program);
 	
 	if ((location = glGetUniformLocation(program, "u_image")) != -1)
@@ -29,6 +40,11 @@ GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 	if ((location = glGetUniformLocation(program, "u_step")) != -1)
 	{
 		glUniform2f(location, 1.0f / (float)width, 1.0f / (float)height);
+	}
+
+	if ((location = glGetUniformLocation(program, "u_time")) != -1)
+	{
+		glUniform1f(location, 0.0);
 	}
 
 	return program;
@@ -85,6 +101,13 @@ void initVAO(void)
 
 void display(void)
 {
+	tim += 0.01f;
+	GLint location;
+	if ((location = glGetUniformLocation(program, "u_time")) != -1)
+	{
+		glUniform1f(location, tim);
+	}
+
 	glClear(GL_COLOR_BUFFER_BIT);	
 
 	// VAO, shader program, and texture already bound
@@ -103,6 +126,30 @@ void keyboard(unsigned char key, int x, int y)
 		   break;
 	   case '2':
            glUseProgram(boxBlurProgram);
+		   break;
+	   case '3':
+		   glUseProgram(imageNegativeProgram);
+		   break;
+	   case '4':
+		   glUseProgram(gaussianBlurProgram);
+		   break;
+	   case '5':
+		   glUseProgram(grayscaleProgram);
+		   break;
+	   case '6':
+		   glUseProgram(edgeDetectionProgram);
+		   break;
+	   case '7':
+		   glUseProgram(toonProgram);
+		   break;
+	   case '8':
+		   glUseProgram(brightnessProgram);
+		   break;
+	   case '9':
+		   glUseProgram(nightVisionProgram);
+		   break;
+	   case '0':
+		   glUseProgram(pixelateProgram);
 		   break;
 	}
 }
@@ -133,6 +180,14 @@ int main(int argc, char* argv[])
     initTextures();
 	passthroughProgram = initShader("passthroughVS.glsl", "passthroughFS.glsl");
 	boxBlurProgram = initShader("passthroughVS.glsl", "boxBlurFS.glsl");
+	imageNegativeProgram = initShader("passthroughVS.glsl", "imageNegativeFS.glsl");
+	grayscaleProgram = initShader("passthroughVS.glsl", "grayscaleFS.glsl");
+	gaussianBlurProgram = initShader("passthroughVS.glsl", "gaussianBlurFS.glsl");
+	edgeDetectionProgram = initShader("passthroughVS.glsl", "edgeDetectionFS.glsl");
+	toonProgram = initShader("passthroughVS.glsl", "toonFS.glsl");
+	brightnessProgram = initShader("passthroughVS.glsl", "brightnessFS.glsl");
+	nightVisionProgram = initShader("passthroughVS.glsl", "nightVisionFS.glsl");
+	pixelateProgram = initShader("passthroughVS.glsl", "pixelateFS.glsl");
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	
