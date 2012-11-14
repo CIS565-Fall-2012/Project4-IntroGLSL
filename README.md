@@ -7,7 +7,7 @@ Due Friday 11/09/2012
 -------------------------------------------------------------------------------
 
 -------------------------------------------------------------------------------
-NOTE:
+Stuff
 -------------------------------------------------------------------------------
 In this project I implemented some very simple fragment shaders.
 
@@ -42,5 +42,11 @@ I also implemented some webGL vertex shaders:
     Potential Functions
 
 The potential functions use the sum of the inverse square distance from five points modulated by simplex noise as input to a sigmoid function to achieve a nice smooth rounded look.
+
+**Menu**
+![Menu](Project4-IntroGLSL/raw/master/part1/menu.png)
+
+**Potential Functions**
+![Menu](Project4-IntroGLSL/raw/master/part2/custom.png)
 
 Blogpost: http://liamboone.blogspot.com/2012/11/project-4-shaders.html
