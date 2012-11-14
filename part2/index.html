@@ -13,12 +13,19 @@
 
 <script id="vs" type="x-shader/x-vertex">
     attribute vec2 position;
+
+    uniform float u_time;
     
     uniform mat4 u_modelViewPerspective;
     
+    varying vec3 fs_color;
+
     void main(void)
     {
-		float height = 0.0;
+        float s_contrib = sin(position.x*2.0*3.14159 + u_time);
+        float t_contrib = cos(position.y*2.0*3.14159 + u_time);
+		float height = s_contrib*t_contrib;
+        fs_color = mix( vec3( 0.3, 0.5, 1 ), vec3( 1, 0.3, 0.5 ), height );
 		gl_Position = u_modelViewPerspective * vec4(vec3(position, height), 1.0);
     }
 </script>
@@ -26,9 +33,11 @@
 <script id="fs" type="x-shader/x-fragment">
     precision mediump float;
 
+    varying vec3 fs_color;
+
     void main(void)
     {
-		gl_FragColor = vec4(vec3(0.0), 1.0);
+		gl_FragColor = vec4(fs_color, 1.0);
     }    
 </script>
 

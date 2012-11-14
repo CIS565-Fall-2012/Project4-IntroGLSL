@@ -6,6 +6,7 @@
 
 int width = 640;
 int height = 480;
+int frame = 0;
 
 GLuint positionLocation = 0;
 GLuint texcoordsLocation = 1;
@@ -13,6 +14,28 @@ const char *attributeLocations[] = { "Position", "Tex" };
 
 GLuint passthroughProgram;
 GLuint boxBlurProgram;
+GLuint negativeProgram;
+GLuint gaussProgram;
+GLuint grayProgram;
+GLuint sobelProgram;
+GLuint toonProgram;
+GLuint medianProgram;
+GLuint hsvProgram;
+GLuint pixelateProgram;
+
+enum MENU_TYPE
+{
+        MENU_DEFAULT,
+        MENU_BOX,
+        MENU_NEGATIVE,
+        MENU_GAUSS,
+        MENU_GRAY,
+        MENU_SOBEL,
+        MENU_TOON,
+        MENU_MEDIAN,
+        MENU_HSV,
+		MENU_PIXELATE
+};
 
 GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 {
@@ -20,7 +43,7 @@ GLuint initShader(const char *vertexShaderPath, const char *fragmentShaderPath)
 	GLint location;
 
 	glUseProgram(program);
-	
+
 	if ((location = glGetUniformLocation(program, "u_image")) != -1)
 	{
 		glUniform1i(location, 0);
@@ -83,9 +106,55 @@ void initVAO(void)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 }
 
+void menu(int item)
+{
+	switch( item )
+	{
+		case MENU_DEFAULT:
+			glUseProgram(passthroughProgram);
+			break;
+		case MENU_BOX:
+			glUseProgram(boxBlurProgram);
+			break;
+		case MENU_NEGATIVE:
+			glUseProgram(negativeProgram);
+			break;
+		case MENU_GAUSS:
+			glUseProgram(gaussProgram);
+			break;
+		case MENU_GRAY:
+			glUseProgram(grayProgram);
+			break;
+		case MENU_SOBEL:
+			glUseProgram(sobelProgram);
+			break;
+		case MENU_TOON:
+			glUseProgram(toonProgram);
+			break;
+		case MENU_MEDIAN:
+			glUseProgram(medianProgram);
+			break;
+		case MENU_HSV:
+			glUseProgram(hsvProgram);
+			break;
+		case MENU_PIXELATE:
+			glUseProgram(pixelateProgram);
+			break;
+	}
+}
+
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);	
+	GLint location;
+	GLint id;
+	
+	glGetIntegerv(GL_CURRENT_PROGRAM, &id);
+
+	if ((location = glGetUniformLocation(id, "u_frame")) != -1)
+	{
+		glUniform1i(location, frame++);
+	}
 
 	// VAO, shader program, and texture already bound
 	glDrawElements(GL_TRIANGLES, 6,  GL_UNSIGNED_SHORT, 0);
@@ -103,6 +172,33 @@ void keyboard(unsigned char key, int x, int y)
 		   break;
 	   case '2':
            glUseProgram(boxBlurProgram);
+		   break;
+	   case '3':
+           glUseProgram(negativeProgram);
+		   break;
+	   case '4':
+           glUseProgram(gaussProgram);
+		   break;
+	   case '5':
+           glUseProgram(grayProgram);
+		   break;
+	   case '6':
+           glUseProgram(sobelProgram);
+		   break;
+	   case '7':
+           glUseProgram(toonProgram);
+		   break;
+	   case '8':
+           glUseProgram(medianProgram);
+		   break;
+	   case '9':
+           glUseProgram(hsvProgram);
+		   break;
+	   case '0':
+           glUseProgram(pixelateProgram);
+		   break;
+	   case 'q':
+		   exit(0);
 		   break;
 	}
 }
@@ -133,6 +229,14 @@ int main(int argc, char* argv[])
     initTextures();
 	passthroughProgram = initShader("passthroughVS.glsl", "passthroughFS.glsl");
 	boxBlurProgram = initShader("passthroughVS.glsl", "boxBlurFS.glsl");
+	negativeProgram = initShader("passthroughVS.glsl", "negativeFS.glsl");
+	gaussProgram = initShader("passthroughVS.glsl", "gaussFS.glsl");
+	grayProgram = initShader("passthroughVS.glsl", "grayFS.glsl");
+	sobelProgram = initShader("passthroughVS.glsl", "sobelFS.glsl");
+	toonProgram = initShader("passthroughVS.glsl", "toonFS.glsl");
+	medianProgram = initShader("passthroughVS.glsl", "medianFS.glsl");
+	hsvProgram = initShader("passthroughVS.glsl", "hsvFS.glsl");
+	pixelateProgram = initShader("passthroughVS.glsl", "pixelateFS.glsl");
 
 	glutDisplayFunc(display);
 	glutReshapeFunc(reshape);	
@@ -140,6 +244,21 @@ int main(int argc, char* argv[])
 
     glUseProgram(passthroughProgram);
     glActiveTexture(GL_TEXTURE0);
+
+	glutCreateMenu(menu);
+
+	glutAddMenuEntry("[1] Default", MENU_DEFAULT);
+	glutAddMenuEntry("[2] 7X7 Box", MENU_BOX);
+	glutAddMenuEntry("[3] Negative", MENU_NEGATIVE);
+	glutAddMenuEntry("[4] 3x3 Gaussian", MENU_GAUSS);
+	glutAddMenuEntry("[5] Grayscale", MENU_GRAY);
+	glutAddMenuEntry("[6] Sobel", MENU_SOBEL);
+	glutAddMenuEntry("[7] Toon", MENU_TOON);
+	glutAddMenuEntry("[8] 5x5 Median", MENU_MEDIAN);
+	glutAddMenuEntry("[9] Color Shift", MENU_HSV);
+	glutAddMenuEntry("[0] Pixelate", MENU_PIXELATE);
+
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 
 	glutMainLoop();
 	return 0;
