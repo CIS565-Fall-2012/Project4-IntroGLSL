@@ -4,11 +4,13 @@ uniform sampler2D u_image;
 uniform vec2 u_step;
 
 const int KERNEL_WIDTH = 3; // Odd
+const float KERNEL_WIDTH_F = 3.0; // Odd
+
 const float offset = 3.0;
 
 mat3 gaussMat = mat3(1,2,1,
 					2,4,2,
-					1,2,1) / 16.0f;
+					1,2,1) / 16.0;
 
 mat3 Sobel_H = mat3(-1, -2, -1,
 					0, 0, 0,
@@ -40,7 +42,7 @@ void main(void)
 			accum += vec2(LH, LV);
 		}
 	}
-	accum = accum / (KERNEL_WIDTH * KERNEL_WIDTH);	
+	accum = accum / (KERNEL_WIDTH_F * KERNEL_WIDTH_F);	
 	float length = length(accum);
 	
 	if(length > (quantize / 100.0))

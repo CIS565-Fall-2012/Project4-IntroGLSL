@@ -8,7 +8,7 @@ const float offset = 3.0;
 
 mat3 gaussMat = mat3(1,2,1,
 					2,4,2,
-					1,2,1) / 16.0f;
+					1,2,1) / 16.0;
 
 mat3 Sobel_H = mat3(-1, -2, -1,
 					0, 0, 0,

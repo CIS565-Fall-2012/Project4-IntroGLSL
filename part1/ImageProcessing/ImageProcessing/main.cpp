@@ -2,7 +2,7 @@
 #include <GL/glut.h>
 #include <iostream>
 #include "Utility.h"
-#include "SOIL.h"
+#include "../SOIL/SOIL.h"
 
 //int width = 640;
 //int height = 480;
