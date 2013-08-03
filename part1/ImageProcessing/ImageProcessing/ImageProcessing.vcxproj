@@ -11,9 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <None Include="brightnessShaderFS.glsl" />
     <None Include="boxBlurFS.glsl" />
+    <None Include="edgeDetectionFS.glsl" />
+    <None Include="gammaCorrectionFS.glsl" />
+    <None Include="gaussianBlurFS.glsl" />
+    <None Include="grayScaleFS.glsl" />
+    <None Include="imageNegativeFS.glsl" />
     <None Include="passthroughFS.glsl" />
     <None Include="passthroughVS.glsl" />
+    <None Include="pixelateShaderFS.glsl" />
+    <None Include="sepiaShadingFS.glsl" />
+    <None Include="toonShadingFS.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -96,6 +105,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
